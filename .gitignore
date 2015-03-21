@@ -1,0 +1,14 @@
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+
+SQliteJoin.iml
+gradle
+gradlew.bat
+local.properties
+app/build
+app/app.iml
+.idea
