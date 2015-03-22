@@ -1,9 +1,15 @@
 package mlevytskiy.sqlitejoin.com.sqlitejoin;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.List;
+
+import mlevytskiy.sqlitejoin.com.sqlitejoin.database.DAO;
+import mlevytskiy.sqlitejoin.com.sqlitejoin.vo.Field;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -12,6 +18,15 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        DAO dao = new DAO(this);
+        List<Field> result =  dao.getAll();
+        Log.i("MainActivity", ""+result.size());
+        Field field = new Field();
+        field.setA("test");
+        field.setB("testC");
+        dao.add(field);
+        result = dao.getAll();
+        Log.i("MainActivity", ""+result.size());
     }
 
 
