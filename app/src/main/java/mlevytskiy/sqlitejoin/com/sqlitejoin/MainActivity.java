@@ -26,7 +26,8 @@ public class MainActivity extends ActionBarActivity {
         field.setB("testC");
         dao.add(field);
         result = dao.getAll();
-        Log.i("MainActivity", ""+result.size());
+        Field testField = dao.searchFieldForId("1");
+        Log.i("MainActivity", ""+result.size() + "field.b=" + testField.getB());
     }
 
 

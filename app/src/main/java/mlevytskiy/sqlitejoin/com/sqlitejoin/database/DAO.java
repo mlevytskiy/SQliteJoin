@@ -49,6 +49,32 @@ public class DAO {
 
     public Field searchFieldForId(String id) {
 
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        Cursor c = db.rawQuery("SELECT * FROM " + DataBaseHelper.TABLE_A, null);
+        Cursor c = db.rawQuery("SELECT " + "*" +
+                " FROM " + DataBaseHelper.TABLE_A +
+                " LEFT JOIN " + DataBaseHelper.TABLE_B +
+                " ON " + DataBaseHelper.TABLE_A + "." + DataBaseHelper.ID_COLUMN
+                + " = " + DataBaseHelper.TABLE_B + "." + DataBaseHelper.FOREIGN_KEY
+                + " AND " + DataBaseHelper.TABLE_A + "." + DataBaseHelper.ID_COLUMN + "=" + id, null);
+
+        List<Field> result = new ArrayList<>();
+        if (c != null && c.moveToFirst()) {
+            do {
+
+                Field field = new Field();
+                String valueA = c.getString(c.getColumnIndex(DataBaseHelper.A));
+                field.setA(valueA);
+                String valueB = c.getString(c.getColumnIndex(DataBaseHelper.B));
+                field.setB(valueB);
+
+                result.add(field);
+            } while (c.moveToNext());
+        }
+        if (result.size() > 0) {
+            return result.get(0);
+        }
+
         return null;
     }
 
